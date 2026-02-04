@@ -270,7 +270,17 @@
             <div id="resultSection" class="hidden">
                 <div class="form-group">
                     <label for="cardNumber">Card Number:</label>
-                    <input type="text" id="cardNumber" placeholder="Card number will appear here">
+                    <div style="display: flex; gap: 10px;">
+                        <input type="text" id="cardNumber" placeholder="Card number will appear here" style="flex: 1;">
+                        <button id="copyNumber" style="padding: 12px 20px; margin: 0; background: #2e7d32;">📋 Copy</button>
+                    </div>
+                </div>
+                
+                <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; margin-bottom: 15px; font-size: 14px; border-left: 4px solid #1976d2;">
+                    <strong>📝 How to use:</strong><br>
+                    1. Click "Copy" button above<br>
+                    2. Click "Check Balance" below<br>
+                    3. Paste the number (Ctrl+V or Cmd+V) into the balance checker
                 </div>
                 
                 <button id="checkBalance" class="check-balance-btn">
@@ -307,9 +317,35 @@
         const scanAnotherBtn = document.getElementById('scanAnother');
         const fileUpload = document.getElementById('fileUpload');
         const useCameraBtn = document.getElementById('useCamera');
+        const copyNumberBtn = document.getElementById('copyNumber');
         
         let stream = null;
         let capturedImageData = null;
+        
+        // Copy number to clipboard
+        copyNumberBtn.addEventListener('click', async () => {
+            const number = cardNumberInput.value.trim();
+            if (!number) {
+                alert('No card number to copy');
+                return;
+            }
+            
+            try {
+                await navigator.clipboard.writeText(number);
+                copyNumberBtn.textContent = '✅ Copied!';
+                setTimeout(() => {
+                    copyNumberBtn.textContent = '📋 Copy';
+                }, 2000);
+            } catch (err) {
+                // Fallback for older browsers
+                cardNumberInput.select();
+                document.execCommand('copy');
+                copyNumberBtn.textContent = '✅ Copied!';
+                setTimeout(() => {
+                    copyNumberBtn.textContent = '📋 Copy';
+                }, 2000);
+            }
+        });
         
         // Handle file upload
         fileUpload.addEventListener('change', (e) => {
