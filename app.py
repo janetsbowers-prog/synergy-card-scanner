@@ -42,7 +42,7 @@ def scan_card():
                         },
                         {
                             "type": "text",
-                            "text": "I am the owner of this gift card and need to extract MY OWN card number to check the balance. This is my personal card. Please read and return only the numeric card number visible on the card (typically 16 digits). Format: just the numbers, no extra text."
+                            "text": "Please extract the long numeric sequence visible in this image. Look for the main number displayed (typically around 16 digits). Return ONLY the number, with no other text or explanation."
                         }
                     ],
                 }
