@@ -42,7 +42,7 @@ def scan_card():
                         },
                         {
                             "type": "text",
-                            "text": "This is a Synergy gift card. Please extract ONLY the card number. The card number is typically a long sequence of digits. Return ONLY the card number with no other text or explanation."
+                            "text": "Please read the card number from this Synergy gift card image. Look for the long number sequence (usually 16 digits with spaces). Extract and return ONLY the card number digits, nothing else. Even if the image quality isn't perfect, do your best to read the numbers visible on the card."
                         }
                     ],
                 }
